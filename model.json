@@ -1,0 +1,7 @@
+{
+    "notes": ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"],
+    "min_duration": 0.0625,
+    "max_duration": 1,
+    "intervals": [],
+    "scales": {}
+}
