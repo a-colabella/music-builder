@@ -1,14 +1,14 @@
 '''
 This is a class for a Scale.
-A Scale takes in a list of notes (a note is a String),
+A Scale takes in a list of pitches (a pitch is a String),
 a Mode, and a starting idx: int.
 It is assumed that the starting idx is between
 0 and len(notes) - 1.
 '''
 class Scale:
     # Constructor for Scale
-    def __init__(self, notes, mode, idx):
-        self.notes = notes
+    def __init__(self, pitches, mode, idx):
+        self.pitches = pitches
         self.mode = mode
         self.start = idx
         self.scale = self.buildScale()
@@ -21,13 +21,13 @@ class Scale:
     def buildScale(self):
         scale_formula = self.mode.getFormula()
         scale_length = len(scale_formula)
-        note_length = len(self.notes)
+        note_length = len(self.pitches)
         scale = []
 
         index = self.start
         
         for i in range(0, scale_length):
-            scale.append(self.notes[index])
+            scale.append(self.pitches[index])
             index = (index + scale_formula[i]) % note_length 
         
         return scale
@@ -41,7 +41,7 @@ class Scale:
     # the full title of this Scale.
     # For example: A minor
     def getTitle(self):
-        return self.notes[self.start] + " " + self.mode.getName()
+        return self.pitches[self.start] + " " + self.mode.getName()
 
 '''
 This is a class for a Mode.
