@@ -1,19 +1,26 @@
 '''
 This is a class for a Scale.
 A Scale takes in a list of notes (a note is a String),
-a formula: List of int,
-and a starting idx: int.
+a Mode, and a starting idx: int.
 It is assumed that the starting idx is between
 0 and len(notes) - 1.
 '''
 class Scale:
+    # Constructor for Scale
+    def __init__(self, notes, mode, idx):
+        self.notes = notes
+        self.mode = mode
+        self.start = idx
+        self.scale = self.buildScale()
+
     '''
     This function returns a list of notes
     build from the full corpus of notes and
     the formula passed to this object.
     '''
     def buildScale(self):
-        scale_length = len(self.formula)
+        scale_formula = self.mode.getFormula()
+        scale_length = len(scale_formula)
         note_length = len(self.notes)
         scale = []
 
@@ -21,18 +28,36 @@ class Scale:
         
         for i in range(0, scale_length):
             scale.append(self.notes[index])
-            index = (index + self.formula[i]) % note_length 
+            index = (index + scale_formula[i]) % note_length 
         
         return scale
-
-    # Constructor for Scale
-    def __init__(self, notes, formula, idx):
-        self.notes = notes
-        self.formula = formula
-        self.start = idx
-        self.scale = self.buildScale()
 
     # Getter for this Scale's scale:
     # a list of notes.
     def getScale(self):
         return self.scale
+
+    # Returns a String that represents
+    # the full title of this Scale.
+    # For example: A minor
+    def getTitle(self):
+        return self.notes[self.start] + " " + self.mode.getName()
+
+'''
+This is a class for a Mode.
+A Mode has a name, such as 'major', 'minor', 'dorian' (A String),
+and a formula (a list of Int) to produce a scale in that mode.
+'''
+class Mode:
+    # Constructor for Mode
+    def __init__(self, name, formula):
+        self.name = name
+        self.formula = formula
+
+    # Get the name of this mode
+    def getName(self):
+        return self.name
+
+    # Get the formula of this mode
+    def getFormula(self):
+        return self.formula
