@@ -20,6 +20,15 @@ for i in range(0, 7):
     n = nb.newNote()
     print(n.getPitch() + " " + str(n.getDuration()))
 
+print("--------")
+
 tim = time_signature.TimeSignature("4/4")
 
 print(tim.getDuration())
+
+mb = measure.MeasureBuilder(tim, scale, min_duration, max_duration)
+
+m = mb.newMeasure()
+
+for x in m.getNotes():
+    print(x.getPitch() + " " + str(x.getDuration()))
